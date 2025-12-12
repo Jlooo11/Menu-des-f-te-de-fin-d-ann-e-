@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Menu de Noël - les Bouchées de Chrystie</title>
+    <title>Menu de Noël - Les Bouchées de Chrystie</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
@@ -220,7 +220,7 @@
             padding: 1rem;
             border-radius: 8px;
             margin-bottom: 1rem;
-            max-height: 200px;
+            max-height: 400px;
             overflow-y: auto;
         }
         
@@ -228,6 +228,12 @@
             margin-bottom: 0.8rem;
             display: flex;
             align-items: center;
+            padding: 8px;
+            border-bottom: 1px solid rgba(255, 215, 0, 0.2);
+        }
+        
+        .checkbox-item:last-child {
+            border-bottom: none;
         }
         
         .checkbox-item input {
@@ -242,11 +248,14 @@
             flex: 1;
             display: flex;
             justify-content: space-between;
+            cursor: pointer;
+            padding: 5px;
         }
         
         .checkbox-item .item-price {
             color: #ffd700;
             font-weight: bold;
+            margin-left: 15px;
         }
         
         .form-submit {
@@ -337,6 +346,10 @@
             #order-form {
                 padding: 1.5rem;
             }
+            
+            .checkbox-group {
+                max-height: 300px;
+            }
         }
         
         /* Animation de lueurs de Noël */
@@ -377,6 +390,20 @@
             0%, 100% { opacity: 0; }
             50% { opacity: 1; }
         }
+        
+        /* Catégories dans le formulaire */
+        .form-category {
+            margin: 1.5rem 0 0.5rem 0;
+            color: #ffd700;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border-bottom: 1px solid #ffd700;
+            padding-bottom: 5px;
+        }
+        
+        .form-category:first-child {
+            margin-top: 0;
+        }
     </style>
 </head>
 <body>
@@ -389,7 +416,7 @@
     <header>
         <div class="header-content">
             <h1 class="shimmer-text">Menu de Noël 2025</h1>
-            <p class="subtitle">les Bouchées de Chrystie - Spécialités des Fêtes</p>
+            <p class="subtitle">Les Bouchées de Chrystie</p>
             <p class="subtitle">Commandez votre repas de Noël maintenant !</p>
             <div class="christmas-icons">
                 <i class="fas fa-tree"></i>
@@ -562,15 +589,15 @@
                 </div>
                 <div class="menu-item">
                     <span class="item-name">Charlotte au chocolat ou à la fraise</span>
-                    <span class="item-price">Sur demande</span>
+                    <span class="item-price"></span>
                 </div>
                 <div class="menu-item">
                     <span class="item-name">Flan</span>
-                    <span class="item-price">Sur demande</span>
+                    <span class="item-price"></span>
                 </div>
                 <div class="menu-item">
                     <span class="item-name">Tiramissu</span>
-                    <span class="item-price">Sur demande</span>
+                    <span class="item-price"></span>
                 </div>
             </div>
         </section>
@@ -581,35 +608,35 @@
             <div class="menu-items">
                 <div class="menu-item">
                     <span class="item-name">Riz safran</span>
-                    <span class="item-price">Sur demande</span>
+                    <span class="item-price"></span>
                 </div>
                 <div class="menu-item">
                     <span class="item-name">Riz perlé</span>
-                    <span class="item-price">Sur demande</span>
+                    <span class="item-price"></span>
                 </div>
                 <div class="menu-item">
                     <span class="item-name">Gratin dauphinois</span>
-                    <span class="item-price">Sur demande</span>
+                    <span class="item-price"></span>
                 </div>
                 <div class="menu-item">
                     <span class="item-name">Pommes de terre rissolées</span>
-                    <span class="item-price">Sur demande</span>
+                    <span class="item-price"></span>
                 </div>
                 <div class="menu-item">
                     <span class="item-name">Riz nature</span>
-                    <span class="item-price">Sur demande</span>
+                    <span class="item-price"></span>
                 </div>
                 <div class="menu-item">
                     <span class="item-name">Légumes vapeur assortis</span>
-                    <span class="item-price">Sur demande</span>
+                    <span class="item-price"></span>
                 </div>
                 <div class="menu-item">
-                    <span class="item-name">Aloco</span>
-                    <span class="item-price">Sur demande</span>
+                    <span class="item-name">Alloco</span>
+                    <span class="item-price"></span>
                 </div>
                 <div class="menu-item">
                     <span class="item-name">Foutou</span>
-                    <span class="item-price">Sur demande</span>
+                    <span class="item-price"></span>
                 </div>
             </div>
         </section>
@@ -636,9 +663,10 @@
                 </div>
                 
                 <div class="form-group">
-                    <label><i class="fas fa-utensils"></i> Sélectionnez vos plats</label>
+                    <label><i class="fas fa-utensils"></i> Sélectionnez vos plats (TOUT le menu est disponible)</label>
                     <div class="checkbox-group">
                         <!-- Apéritif -->
+                        <div class="form-category">🍷 Apéritif</div>
                         <div class="checkbox-item">
                             <input type="checkbox" id="aperitif1" name="menu[]" value="Feuilletée au saumon, viande ou poulet - 12.000 F">
                             <label for="aperitif1">Feuilletée au saumon, viande ou poulet <span class="item-price">12.000 F</span></label>
@@ -657,6 +685,7 @@
                         </div>
                         
                         <!-- Volaille -->
+                        <div class="form-category">🍗 Volaille</div>
                         <div class="checkbox-item">
                             <input type="checkbox" id="volaille1" name="menu[]" value="Coq au vin - 25.000 F">
                             <label for="volaille1">Coq au vin <span class="item-price">25.000 F</span></label>
@@ -675,6 +704,7 @@
                         </div>
                         
                         <!-- Viande Rouge -->
+                        <div class="form-category">🥩 Viande Rouge</div>
                         <div class="checkbox-item">
                             <input type="checkbox" id="viande1" name="menu[]" value="Steak au poivre vert - 30.000 F">
                             <label for="viande1">Steak au poivre vert <span class="item-price">30.000 F</span></label>
@@ -696,7 +726,8 @@
                             <label for="viande5">Brochettes de bœuf (unité) <span class="item-price">2.500 F</span></label>
                         </div>
                         
-                        <!-- Poissons -->
+                        <!-- Poissons et Crustacés -->
+                        <div class="form-category">🐟 Poissons et Crustacés</div>
                         <div class="checkbox-item">
                             <input type="checkbox" id="poisson1" name="menu[]" value="Mérou au four - 55.000-75.000 F">
                             <label for="poisson1">Mérou au four <span class="item-price">55.000-75.000 F</span></label>
@@ -713,12 +744,112 @@
                             <input type="checkbox" id="poisson4" name="menu[]" value="Mérou avec assortiment de gambas et écrevisses - 100.000 F">
                             <label for="poisson4">Mérou avec assortiment de gambas et écrevisses <span class="item-price">100.000 F</span></label>
                         </div>
+                        
+                        <!-- Soupes -->
+                        <div class="form-category">🍲 Soupes</div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="soupe1" name="menu[]" value="Machoiron - 20.000 F">
+                            <label for="soupe1">Machoiron <span class="item-price">20.000 F</span></label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="soupe2" name="menu[]" value="Pêcheur - 25.000 F">
+                            <label for="soupe2">Pêcheur <span class="item-price">25.000 F</span></label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="soupe3" name="menu[]" value="Tripes de mouton, tête, pattes - 35.000 F">
+                            <label for="soupe3">Tripes de mouton, tête, pattes <span class="item-price">35.000 F</span></label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="soupe4" name="menu[]" value="Kedjenou de pondeuse - 8.000 F">
+                            <label for="soupe4">Kedjenou de pondeuse <span class="item-price">8.000 F</span></label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="soupe5" name="menu[]" value="Kedjenou de pintade - 20.000 F">
+                            <label for="soupe5">Kedjenou de pintade <span class="item-price">20.000 F</span></label>
+                        </div>
+                        
+                        <!-- Sauces -->
+                        <div class="form-category">🥘 Sauces</div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="sauce1" name="menu[]" value="Sauce gouagoussou (agouti, biche ou hérisson) - 5 pers - 30.000 F">
+                            <label for="sauce1">Sauce gouagoussou (agouti, biche ou hérisson) - 5 pers <span class="item-price">30.000 F</span></label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="sauce2" name="menu[]" value="Sauce graine (queue de bœuf, crabes, escargots, viande fumée) - 5 pers - 35.000 F">
+                            <label for="sauce2">Sauce graine (queue de bœuf, crabes, escargots, viande fumée) - 5 pers <span class="item-price">35.000 F</span></label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="sauce3" name="menu[]" value="Sauce graine poulet fumé - 8.000 F">
+                            <label for="sauce3">Sauce graine poulet fumé <span class="item-price">8.000 F</span></label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="sauce4" name="menu[]" value="Amiwoh avec poulet pondeuse - 20.000 F">
+                            <label for="sauce4">Amiwoh avec poulet pondeuse <span class="item-price">20.000 F</span></label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="sauce5" name="menu[]" value="Amiwoh avec poulet africain - 30.000 F">
+                            <label for="sauce5">Amiwoh avec poulet africain <span class="item-price">30.000 F</span></label>
+                        </div>
+                        
+                        <!-- Desserts -->
+                        <div class="form-category">🍰 Desserts</div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="dessert1" name="menu[]" value="Bûche de Noël (parfum au choix) - 15.000 F et plus">
+                            <label for="dessert1">Bûche de Noël (Vanille, Moka, Fraise, Chocolat, 3 chocolats) <span class="item-price">15.000 F et plus</span></label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="dessert2" name="menu[]" value="Charlotte au chocolat ou à la fraise">
+                            <label for="dessert2">Charlotte au chocolat ou à la fraise <span class="item-price"></span></label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="dessert3" name="menu[]" value="Flan">
+                            <label for="dessert3">Flan <span class="item-price"></span></label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="dessert4" name="menu[]" value="Tiramissu">
+                            <label for="dessert4">Tiramissu <span class="item-price"></span></label>
+                        </div>
+                        
+                        <!-- Accompagnements -->
+                        <div class="form-category">🥗 Accompagnements</div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="accomp1" name="menu[]" value="Riz safran">
+                            <label for="accomp1">Riz safran <span class="item-price"></span></label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="accomp2" name="menu[]" value="Riz perlé">
+                            <label for="accomp2">Riz perlé <span class="item-price"></span></label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="accomp3" name="menu[]" value="Gratin dauphinois">
+                            <label for="accomp3">Gratin dauphinois <span class="item-price"></span></label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="accomp4" name="menu[]" value="Pommes de terre rissolées">
+                            <label for="accomp4">Pommes de terre rissolées <span class="item-price"></span></label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="accomp5" name="menu[]" value="Riz nature">
+                            <label for="accomp5">Riz nature <span class="item-price"></span></label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="accomp6" name="menu[]" value="Légumes vapeur assortis">
+                            <label for="accomp6">Légumes vapeur (pomme de terre, choux-fleur, choux de Bruxelles, navet, carottes, brocolis) <span class="item-price"></span></label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="accomp7" name="menu[]" value="Aloco">
+                            <label for="accomp7">Alloco <span class="item-price"></span></label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="accomp8" name="menu[]" value="Foutou">
+                            <label for="accomp8">Foutou <span class="item-price"></span></label>
+                        </div>
                     </div>
                 </div>
                 
                 <div class="form-group">
                     <label for="notes"><i class="fas fa-sticky-note"></i> Notes ou instructions spéciales</label>
-                    <textarea id="notes" name="notes" placeholder="Précisez les quantités, les variantes de plats, allergies alimentaires, etc."></textarea>
+                    <textarea id="notes" name="notes" placeholder="Précisez les quantités, les variantes de plats (ex: feuilletée au poulet), les parfums de bûche, allergies alimentaires, heure de livraison souhaitée, etc."></textarea>
                 </div>
                 
                 <div class="form-submit">
@@ -842,11 +973,53 @@
             message += `*Date de livraison souhaitée:* ${date}%0A%0A`;
             message += `*Plats commandés:*%0A`;
             
-            selectedItems.forEach((item, index) => {
-                message += `${index + 1}. ${item}%0A`;
+            // Organiser par catégories
+            const categories = {
+                'Apéritif': [],
+                'Volaille': [],
+                'Viande Rouge': [],
+                'Poissons et Crustacés': [],
+                'Soupes': [],
+                'Sauces': [],
+                'Desserts': [],
+                'Accompagnements': []
+            };
+            
+            selectedItems.forEach(item => {
+                // Trouver la catégorie de l'item
+                let category = 'Divers';
+                if (item.includes('Feuilletée') || item.includes('Quiches') || item.includes('Cornet') || item.includes('amuses bouche')) {
+                    category = 'Apéritif';
+                } else if (item.includes('Coq au vin') || item.includes('Dinde') || item.includes('Poulet rôti') || item.includes('Brochettes de dinde')) {
+                    category = 'Volaille';
+                } else if (item.includes('Steak') || item.includes('Gigot') || item.includes('Souris') || item.includes('Queue de bœuf') || item.includes('Brochettes de bœuf')) {
+                    category = 'Viande Rouge';
+                } else if (item.includes('Mérou') || item.includes('poissons au four') || item.includes('fruits de mer') || item.includes('gambas') || item.includes('écrevisses')) {
+                    category = 'Poissons et Crustacés';
+                } else if (item.includes('Machoiron') || item.includes('Pêcheur') || item.includes('Tripes') || item.includes('Kedjenou')) {
+                    category = 'Soupes';
+                } else if (item.includes('Sauce') || item.includes('Amiwoh')) {
+                    category = 'Sauces';
+                } else if (item.includes('Bûche') || item.includes('Charlotte') || item.includes('Flan') || item.includes('Tiramissu')) {
+                    category = 'Desserts';
+                } else if (item.includes('Riz') || item.includes('Gratin') || item.includes('Pommes de terre') || item.includes('Légumes') || item.includes('Aloco') || item.includes('Foutou')) {
+                    category = 'Accompagnements';
+                }
+                
+                categories[category].push(item);
             });
             
-            message += `%0A*Notes supplémentaires:*%0A${notes}%0A%0A`;
+            // Construire le message par catégories
+            Object.keys(categories).forEach(category => {
+                if (categories[category].length > 0) {
+                    message += `%0A*${category.toUpperCase()}*%0A`;
+                    categories[category].forEach((item, index) => {
+                        message += `${index + 1}. ${item}%0A`;
+                    });
+                }
+            });
+            
+            message += `%0A*Notes supplémentaires:*%0A${notes || 'Aucune note'}%0A%0A`;
             message += `*Merci de confirmer cette commande et de préciser le montant total et les modalités de paiement/livraison.*`;
             
             // Ouvrir WhatsApp avec le message pré-rempli
@@ -854,7 +1027,12 @@
             window.open(whatsappURL, '_blank');
             
             // Afficher un message de confirmation
-            alert('Votre commande a été préparée ! Vous allez être redirigé vers WhatsApp pour l\'envoyer.');
+            alert(`Votre commande de ${selectedItems.length} plat(s) a été préparée ! Vous allez être redirigé vers WhatsApp pour l'envoyer.`);
+            
+            // Réinitialiser le formulaire après un délai
+            setTimeout(() => {
+                document.getElementById('christmas-order-form').reset();
+            }, 1000);
         });
         
         // Initialiser les animations
@@ -871,6 +1049,9 @@
             dateInput.min = formatDate(minDate);
             dateInput.max = formatDate(maxDate);
             dateInput.value = formatDate(new Date(2025, 11, 25)); // 25 décembre par défaut
+            
+            // Ajouter un bouton "Tout sélectionner"
+            addSelectAllButton();
         });
         
         // Formater la date pour l'input date
@@ -892,6 +1073,35 @@
                 this.style.transform = 'scale(1)';
             });
         });
+        
+        // Fonction pour ajouter un bouton "Tout sélectionner"
+        function addSelectAllButton() {
+            const formGroup = document.querySelector('.form-group:has(.checkbox-group)');
+            const selectAllDiv = document.createElement('div');
+            selectAllDiv.style.marginBottom = '10px';
+            selectAllDiv.innerHTML = `
+                <button type="button" id="select-all-btn" style="background: #ffd700; color: #0a3d2f; border: none; padding: 8px 15px; border-radius: 5px; cursor: pointer; font-weight: bold; margin-right: 10px;">
+                    <i class="fas fa-check-square"></i> Tout sélectionner
+                </button>
+                <button type="button" id="deselect-all-btn" style="background: #ff4d4d; color: white; border: none; padding: 8px 15px; border-radius: 5px; cursor: pointer; font-weight: bold;">
+                    <i class="fas fa-times-circle"></i> Tout désélectionner
+                </button>
+            `;
+            
+            formGroup.insertBefore(selectAllDiv, document.querySelector('.checkbox-group'));
+            
+            document.getElementById('select-all-btn').addEventListener('click', function() {
+                document.querySelectorAll('input[name="menu[]"]').forEach(checkbox => {
+                    checkbox.checked = true;
+                });
+            });
+            
+            document.getElementById('deselect-all-btn').addEventListener('click', function() {
+                document.querySelectorAll('input[name="menu[]"]').forEach(checkbox => {
+                    checkbox.checked = false;
+                });
+            });
+        }
     </script>
 </body>
 </html>
