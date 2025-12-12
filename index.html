@@ -1,0 +1,897 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu de Noël - les Bouchées de Chrystie</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Georgia', serif;
+        }
+        
+        body {
+            background-color: #0a3d2f;
+            color: #fff;
+            background-image: 
+                radial-gradient(circle at 20% 80%, rgba(255, 50, 50, 0.1) 0%, transparent 20%),
+                radial-gradient(circle at 80% 20%, rgba(255, 215, 0, 0.1) 0%, transparent 20%);
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+        
+        /* Animation de neige */
+        #snow {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1000;
+        }
+        
+        .snowflake {
+            position: absolute;
+            background-color: white;
+            border-radius: 50%;
+            opacity: 0.8;
+            top: -10px;
+        }
+        
+        /* Header */
+        header {
+            background: linear-gradient(to right, #b30000, #ff4d4d);
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+            position: relative;
+            z-index: 10;
+            border-bottom: 8px solid #ffd700;
+        }
+        
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        h1 {
+            font-size: 2.8rem;
+            color: #ffd700;
+            text-shadow: 3px 3px 0 #b30000;
+            margin-bottom: 0.5rem;
+            letter-spacing: 1px;
+        }
+        
+        .subtitle {
+            font-size: 1.3rem;
+            color: #fff;
+            margin-bottom: 0.5rem;
+        }
+        
+        .christmas-icons {
+            font-size: 1.8rem;
+            color: #ffd700;
+            margin-top: 0.5rem;
+        }
+        
+        .christmas-icons i {
+            margin: 0 10px;
+            animation: bounce 2s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        /* Container principal */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        /* Sections de menu */
+        .menu-section {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2.5rem;
+            border: 3px solid #ffd700;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .menu-section::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(to right, #ff4d4d, #ffd700, #ff4d4d);
+        }
+        
+        .section-title {
+            color: #ffd700;
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px dashed #ffd700;
+            display: flex;
+            align-items: center;
+        }
+        
+        .section-title i {
+            margin-right: 15px;
+            font-size: 1.8rem;
+        }
+        
+        /* Items de menu */
+        .menu-items {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .menu-item {
+            background-color: rgba(0, 0, 0, 0.3);
+            padding: 1.5rem;
+            border-radius: 10px;
+            border-left: 5px solid #ff4d4d;
+            transition: transform 0.3s, box-shadow 0.3s;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .menu-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(255, 215, 0, 0.3);
+            border-left-color: #ffd700;
+        }
+        
+        .item-name {
+            font-size: 1.2rem;
+            font-weight: bold;
+            flex: 1;
+        }
+        
+        .item-price {
+            color: #ffd700;
+            font-weight: bold;
+            font-size: 1.3rem;
+            margin-left: 15px;
+            white-space: nowrap;
+        }
+        
+        /* Section formulaire */
+        #order-form {
+            background-color: rgba(10, 61, 47, 0.9);
+            border: 3px solid #ffd700;
+            border-radius: 15px;
+            padding: 2.5rem;
+            margin-top: 3rem;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+        }
+        
+        .form-title {
+            color: #ffd700;
+            font-size: 2.2rem;
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #ffd700;
+            font-weight: bold;
+        }
+        
+        input, textarea {
+            width: 100%;
+            padding: 12px;
+            border-radius: 8px;
+            border: 2px solid #ffd700;
+            background-color: rgba(255, 255, 255, 0.9);
+            font-size: 1rem;
+        }
+        
+        textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+        
+        .checkbox-group {
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+        
+        .checkbox-item {
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .checkbox-item input {
+            width: auto;
+            margin-right: 10px;
+            transform: scale(1.3);
+        }
+        
+        .checkbox-item label {
+            color: white;
+            font-weight: normal;
+            flex: 1;
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .checkbox-item .item-price {
+            color: #ffd700;
+            font-weight: bold;
+        }
+        
+        .form-submit {
+            text-align: center;
+            margin-top: 2rem;
+        }
+        
+        .submit-btn {
+            background: linear-gradient(to right, #ff4d4d, #ff8c00);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.2rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: bold;
+            box-shadow: 0 5px 15px rgba(255, 77, 77, 0.4);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .submit-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px rgba(255, 77, 77, 0.6);
+            background: linear-gradient(to right, #ff8c00, #ff4d4d);
+        }
+        
+        .submit-btn i {
+            margin-right: 10px;
+            font-size: 1.4rem;
+        }
+        
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+            background-color: rgba(0, 0, 0, 0.4);
+            border-top: 3px solid #ffd700;
+        }
+        
+        .whatsapp-contact {
+            background-color: #25D366;
+            color: white;
+            display: inline-flex;
+            align-items: center;
+            padding: 10px 20px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            margin-top: 1rem;
+            transition: transform 0.3s;
+        }
+        
+        .whatsapp-contact:hover {
+            transform: scale(1.05);
+        }
+        
+        .whatsapp-contact i {
+            margin-right: 10px;
+            font-size: 1.5rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .subtitle {
+                font-size: 1rem;
+            }
+            
+            .container {
+                padding: 1rem;
+            }
+            
+            .menu-section {
+                padding: 1.5rem;
+            }
+            
+            .menu-items {
+                grid-template-columns: 1fr;
+            }
+            
+            #order-form {
+                padding: 1.5rem;
+            }
+        }
+        
+        /* Animation de lueurs de Noël */
+        @keyframes glow {
+            0%, 100% { opacity: 0.7; }
+            50% { opacity: 1; }
+        }
+        
+        .glowing-border {
+            animation: glow 2s infinite;
+        }
+        
+        /* Animation pour les titres */
+        @keyframes shimmer {
+            0% { background-position: -1000px 0; }
+            100% { background-position: 1000px 0; }
+        }
+        
+        .shimmer-text {
+            background: linear-gradient(to right, #ffd700 20%, #fff 40%, #ffd700 60%);
+            background-size: 1000px 100%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: shimmer 3s infinite linear;
+        }
+        
+        /* Animation pour les étoiles */
+        .star {
+            position: absolute;
+            background-color: white;
+            clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+            opacity: 0;
+            animation: twinkle 5s infinite;
+        }
+        
+        @keyframes twinkle {
+            0%, 100% { opacity: 0; }
+            50% { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Animation de neige -->
+    <div id="snow"></div>
+    
+    <!-- Étoiles animées -->
+    <div id="stars"></div>
+    
+    <header>
+        <div class="header-content">
+            <h1 class="shimmer-text">Menu de Noël 2025</h1>
+            <p class="subtitle">les Bouchées de Chrystie - Spécialités des Fêtes</p>
+            <p class="subtitle">Commandez votre repas de Noël maintenant !</p>
+            <div class="christmas-icons">
+                <i class="fas fa-tree"></i>
+                <i class="fas fa-candy-cane"></i>
+                <i class="fas fa-gift"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-snowflake"></i>
+            </div>
+        </div>
+    </header>
+    
+    <div class="container">
+        <!-- Menu Apéritif -->
+        <section class="menu-section glowing-border">
+            <h2 class="section-title"><i class="fas fa-glass-cheers"></i> Apéritif</h2>
+            <div class="menu-items">
+                <div class="menu-item">
+                    <span class="item-name">Feuilletée au saumon, viande ou poulet</span>
+                    <span class="item-price">12.000 F</span>
+                </div>
+                <div class="menu-item">
+                    <span class="item-name">Quiches au poulet ou au saumon ou Lorraine</span>
+                    <span class="item-price">12.000 F</span>
+                </div>
+                <div class="menu-item">
+                    <span class="item-name">Cornet au thon, jambon ou poulet</span>
+                    <span class="item-price">12.000 F</span>
+                </div>
+                <div class="menu-item">
+                    <span class="item-name">Assortiment d'amuses bouche (10 personnes)</span>
+                    <span class="item-price">25.000 F</span>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Menu Volaille -->
+        <section class="menu-section glowing-border">
+            <h2 class="section-title"><i class="fas fa-drumstick-bite"></i> Volaille</h2>
+            <div class="menu-items">
+                <div class="menu-item">
+                    <span class="item-name">Coq au vin</span>
+                    <span class="item-price">25.000 F</span>
+                </div>
+                <div class="menu-item">
+                    <span class="item-name">Dinde farcie</span>
+                    <span class="item-price">55.000 - 75.000 F</span>
+                </div>
+                <div class="menu-item">
+                    <span class="item-name">Poulet rôti</span>
+                    <span class="item-price">8.000 F</span>
+                </div>
+                <div class="menu-item">
+                    <span class="item-name">Brochettes de dinde (unité)</span>
+                    <span class="item-price">2.000 F</span>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Menu Viande Rouge -->
+        <section class="menu-section glowing-border">
+            <h2 class="section-title"><i class="fas fa-bacon"></i> Viande Rouge</h2>
+            <div class="menu-items">
+                <div class="menu-item">
+                    <span class="item-name">Steak au poivre vert</span>
+                    <span class="item-price">30.000 F</span>
+                </div>
+                <div class="menu-item">
+                    <span class="item-name">Gigot d'agneau confit</span>
+                    <span class="item-price">40.000 F</span>
+                </div>
+                <div class="menu-item">
+                    <span class="item-name">Souris d'agneau au gingembre</span>
+                    <span class="item-price">65.000 F</span>
+                </div>
+                <div class="menu-item">
+                    <span class="item-name">Queue de bœuf sautée à la tomate</span>
+                    <span class="item-price">35.000 F</span>
+                </div>
+                <div class="menu-item">
+                    <span class="item-name">Brochettes de bœuf (unité)</span>
+                    <span class="item-price">2.500 F</span>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Menu Poissons et Crustacés -->
+        <section class="menu-section glowing-border">
+            <h2 class="section-title"><i class="fas fa-fish"></i> Poissons et Crustacés</h2>
+            <div class="menu-items">
+                <div class="menu-item">
+                    <span class="item-name">Mérou au four</span>
+                    <span class="item-price">55.000 - 75.000 F</span>
+                </div>
+                <div class="menu-item">
+                    <span class="item-name">Autres poissons au four</span>
+                    <span class="item-price">25.000 - 40.000 F</span>
+                </div>
+                <div class="menu-item">
+                    <span class="item-name">Plateau de fruits de mer gratiné</span>
+                    <span class="item-price">150.000 F</span>
+                </div>
+                <div class="menu-item">
+                    <span class="item-name">Mérou avec assortiment de gambas et écrevisses</span>
+                    <span class="item-price">100.000 F</span>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Menu Soupes -->
+        <section class="menu-section glowing-border">
+            <h2 class="section-title"><i class="fas fa-utensil-spoon"></i> Soupes</h2>
+            <div class="menu-items">
+                <div class="menu-item">
+                    <span class="item-name">Machoiron</span>
+                    <span class="item-price">20.000 F</span>
+                </div>
+                <div class="menu-item">
+                    <span class="item-name">Pêcheur</span>
+                    <span class="item-price">25.000 F</span>
+                </div>
+                <div class="menu-item">
+                    <span class="item-name">Tripes de mouton, tête, pattes</span>
+                    <span class="item-price">35.000 F</span>
+                </div>
+                <div class="menu-item">
+                    <span class="item-name">Kedjenou de pondeuse</span>
+                    <span class="item-price">8.000 F</span>
+                </div>
+                <div class="menu-item">
+                    <span class="item-name">Kedjenou de pintade</span>
+                    <span class="item-price">20.000 F</span>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Menu Sauces -->
+        <section class="menu-section glowing-border">
+            <h2 class="section-title"><i class="fas fa-mortar-pestle"></i> Sauces</h2>
+            <div class="menu-items">
+                <div class="menu-item">
+                    <span class="item-name">Sauce gouagoussou (agouti, biche ou hérisson) - 5 pers</span>
+                    <span class="item-price">30.000 F</span>
+                </div>
+                <div class="menu-item">
+                    <span class="item-name">Sauce graine (queue de bœuf, crabes, escargots, viande fumée) - 5 pers</span>
+                    <span class="item-price">35.000 F</span>
+                </div>
+                <div class="menu-item">
+                    <span class="item-name">Sauce graine poulet fumé</span>
+                    <span class="item-price">8.000 F</span>
+                </div>
+                <div class="menu-item">
+                    <span class="item-name">Amiwoh avec poulet pondeuse</span>
+                    <span class="item-price">20.000 F</span>
+                </div>
+                <div class="menu-item">
+                    <span class="item-name">Amiwoh avec poulet africain</span>
+                    <span class="item-price">30.000 F</span>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Menu Desserts -->
+        <section class="menu-section glowing-border">
+            <h2 class="section-title"><i class="fas fa-ice-cream"></i> Desserts</h2>
+            <div class="menu-items">
+                <div class="menu-item">
+                    <span class="item-name">Bûche de Noël (Vanille, Moka, Fraise, Chocolat, 3 chocolats)</span>
+                    <span class="item-price">15.000 F et plus</span>
+                </div>
+                <div class="menu-item">
+                    <span class="item-name">Charlotte au chocolat ou à la fraise</span>
+                    <span class="item-price">Sur demande</span>
+                </div>
+                <div class="menu-item">
+                    <span class="item-name">Flan</span>
+                    <span class="item-price">Sur demande</span>
+                </div>
+                <div class="menu-item">
+                    <span class="item-name">Tiramissu</span>
+                    <span class="item-price">Sur demande</span>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Menu Accompagnements -->
+        <section class="menu-section glowing-border">
+            <h2 class="section-title"><i class="fas fa-carrot"></i> Accompagnements</h2>
+            <div class="menu-items">
+                <div class="menu-item">
+                    <span class="item-name">Riz safran</span>
+                    <span class="item-price">Sur demande</span>
+                </div>
+                <div class="menu-item">
+                    <span class="item-name">Riz perlé</span>
+                    <span class="item-price">Sur demande</span>
+                </div>
+                <div class="menu-item">
+                    <span class="item-name">Gratin dauphinois</span>
+                    <span class="item-price">Sur demande</span>
+                </div>
+                <div class="menu-item">
+                    <span class="item-name">Pommes de terre rissolées</span>
+                    <span class="item-price">Sur demande</span>
+                </div>
+                <div class="menu-item">
+                    <span class="item-name">Riz nature</span>
+                    <span class="item-price">Sur demande</span>
+                </div>
+                <div class="menu-item">
+                    <span class="item-name">Légumes vapeur assortis</span>
+                    <span class="item-price">Sur demande</span>
+                </div>
+                <div class="menu-item">
+                    <span class="item-name">Aloco</span>
+                    <span class="item-price">Sur demande</span>
+                </div>
+                <div class="menu-item">
+                    <span class="item-name">Foutou</span>
+                    <span class="item-price">Sur demande</span>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Formulaire de commande -->
+        <section id="order-form">
+            <h2 class="form-title"><i class="fas fa-shopping-cart"></i> Formulaire de Commande</h2>
+            <p style="text-align: center; margin-bottom: 2rem; color: #ffd700;">Sélectionnez les plats que vous souhaitez commander et envoyez votre demande directement sur WhatsApp !</p>
+            
+            <form id="christmas-order-form">
+                <div class="form-group">
+                    <label for="name"><i class="fas fa-user"></i> Nom et Prénom</label>
+                    <input type="text" id="name" name="name" required placeholder="Votre nom complet">
+                </div>
+                
+                <div class="form-group">
+                    <label for="phone"><i class="fas fa-phone"></i> Numéro de téléphone</label>
+                    <input type="tel" id="phone" name="phone" required placeholder="Votre numéro pour la confirmation">
+                </div>
+                
+                <div class="form-group">
+                    <label for="date"><i class="fas fa-calendar-alt"></i> Date de livraison souhaitée</label>
+                    <input type="date" id="date" name="date" required min="2025-12-20" max="2025-12-31">
+                </div>
+                
+                <div class="form-group">
+                    <label><i class="fas fa-utensils"></i> Sélectionnez vos plats</label>
+                    <div class="checkbox-group">
+                        <!-- Apéritif -->
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="aperitif1" name="menu[]" value="Feuilletée au saumon, viande ou poulet - 12.000 F">
+                            <label for="aperitif1">Feuilletée au saumon, viande ou poulet <span class="item-price">12.000 F</span></label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="aperitif2" name="menu[]" value="Quiches au poulet ou au saumon ou Lorraine - 12.000 F">
+                            <label for="aperitif2">Quiches au poulet ou au saumon ou Lorraine <span class="item-price">12.000 F</span></label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="aperitif3" name="menu[]" value="Cornet au thon, jambon ou poulet - 12.000 F">
+                            <label for="aperitif3">Cornet au thon, jambon ou poulet <span class="item-price">12.000 F</span></label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="aperitif4" name="menu[]" value="Assortiment d'amuses bouche (10 personnes) - 25.000 F">
+                            <label for="aperitif4">Assortiment d'amuses bouche (10 personnes) <span class="item-price">25.000 F</span></label>
+                        </div>
+                        
+                        <!-- Volaille -->
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="volaille1" name="menu[]" value="Coq au vin - 25.000 F">
+                            <label for="volaille1">Coq au vin <span class="item-price">25.000 F</span></label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="volaille2" name="menu[]" value="Dinde farcie - 55.000-75.000 F">
+                            <label for="volaille2">Dinde farcie <span class="item-price">55.000-75.000 F</span></label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="volaille3" name="menu[]" value="Poulet rôti - 8.000 F">
+                            <label for="volaille3">Poulet rôti <span class="item-price">8.000 F</span></label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="volaille4" name="menu[]" value="Brochettes de dinde (unité) - 2.000 F">
+                            <label for="volaille4">Brochettes de dinde (unité) <span class="item-price">2.000 F</span></label>
+                        </div>
+                        
+                        <!-- Viande Rouge -->
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="viande1" name="menu[]" value="Steak au poivre vert - 30.000 F">
+                            <label for="viande1">Steak au poivre vert <span class="item-price">30.000 F</span></label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="viande2" name="menu[]" value="Gigot d'agneau confit - 40.000 F">
+                            <label for="viande2">Gigot d'agneau confit <span class="item-price">40.000 F</span></label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="viande3" name="menu[]" value="Souris d'agneau au gingembre - 65.000 F">
+                            <label for="viande3">Souris d'agneau au gingembre <span class="item-price">65.000 F</span></label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="viande4" name="menu[]" value="Queue de bœuf sautée à la tomate - 35.000 F">
+                            <label for="viande4">Queue de bœuf sautée à la tomate <span class="item-price">35.000 F</span></label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="viande5" name="menu[]" value="Brochettes de bœuf (unité) - 2.500 F">
+                            <label for="viande5">Brochettes de bœuf (unité) <span class="item-price">2.500 F</span></label>
+                        </div>
+                        
+                        <!-- Poissons -->
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="poisson1" name="menu[]" value="Mérou au four - 55.000-75.000 F">
+                            <label for="poisson1">Mérou au four <span class="item-price">55.000-75.000 F</span></label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="poisson2" name="menu[]" value="Autres poissons au four - 25.000-40.000 F">
+                            <label for="poisson2">Autres poissons au four <span class="item-price">25.000-40.000 F</span></label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="poisson3" name="menu[]" value="Plateau de fruits de mer gratiné - 150.000 F">
+                            <label for="poisson3">Plateau de fruits de mer gratiné <span class="item-price">150.000 F</span></label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="poisson4" name="menu[]" value="Mérou avec assortiment de gambas et écrevisses - 100.000 F">
+                            <label for="poisson4">Mérou avec assortiment de gambas et écrevisses <span class="item-price">100.000 F</span></label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="notes"><i class="fas fa-sticky-note"></i> Notes ou instructions spéciales</label>
+                    <textarea id="notes" name="notes" placeholder="Précisez les quantités, les variantes de plats, allergies alimentaires, etc."></textarea>
+                </div>
+                
+                <div class="form-submit">
+                    <button type="submit" class="submit-btn"><i class="fab fa-whatsapp"></i> Envoyer la commande sur WhatsApp</button>
+                </div>
+            </form>
+        </section>
+    </div>
+    
+    <footer>
+        <p>Pour toute question, contactez directement le traiteur :</p>
+        <a href="https://wa.me/2250708481314" class="whatsapp-contact" target="_blank">
+            <i class="fab fa-whatsapp"></i> WhatsApp: 07 08 48 13 14
+        </a>
+        <p style="margin-top: 1.5rem; color: #ffd700;">Joyeux Noël et Bonne Année 2025 !</p>
+        <p>© Menu de Noël - Traiteur Maman - Décembre 2025</p>
+    </footer>
+    
+    <script>
+        // Animation de neige
+        function createSnow() {
+            const snowContainer = document.getElementById('snow');
+            const snowflakeCount = 100;
+            
+            for (let i = 0; i < snowflakeCount; i++) {
+                const snowflake = document.createElement('div');
+                snowflake.classList.add('snowflake');
+                
+                // Taille aléatoire
+                const size = Math.random() * 10 + 5;
+                snowflake.style.width = `${size}px`;
+                snowflake.style.height = `${size}px`;
+                
+                // Position initiale aléatoire
+                const startPosition = Math.random() * 100;
+                snowflake.style.left = `${startPosition}vw`;
+                
+                // Animation
+                const animationDuration = Math.random() * 10 + 10;
+                snowflake.style.animation = `fall ${animationDuration}s linear infinite`;
+                
+                // Opacité aléatoire
+                snowflake.style.opacity = Math.random() * 0.7 + 0.3;
+                
+                // Délai d'animation
+                snowflake.style.animationDelay = `${Math.random() * 5}s`;
+                
+                snowContainer.appendChild(snowflake);
+            }
+            
+            // Ajouter l'animation de chute
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes fall {
+                    0% {
+                        transform: translateY(-10px) rotate(0deg);
+                        opacity: 0.8;
+                    }
+                    100% {
+                        transform: translateY(100vh) rotate(360deg);
+                        opacity: 0;
+                    }
+                }
+            `;
+            document.head.appendChild(style);
+        }
+        
+        // Animation d'étoiles
+        function createStars() {
+            const starsContainer = document.getElementById('stars');
+            const starCount = 30;
+            
+            for (let i = 0; i < starCount; i++) {
+                const star = document.createElement('div');
+                star.classList.add('star');
+                
+                // Taille aléatoire
+                const size = Math.random() * 20 + 10;
+                star.style.width = `${size}px`;
+                star.style.height = `${size}px`;
+                
+                // Position aléatoire
+                star.style.left = `${Math.random() * 100}vw`;
+                star.style.top = `${Math.random() * 100}vh`;
+                
+                // Animation delay aléatoire
+                star.style.animationDelay = `${Math.random() * 5}s`;
+                
+                starsContainer.appendChild(star);
+            }
+        }
+        
+        // Gestion du formulaire
+        document.getElementById('christmas-order-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Récupérer les données du formulaire
+            const name = document.getElementById('name').value;
+            const phone = document.getElementById('phone').value;
+            const date = document.getElementById('date').value;
+            const notes = document.getElementById('notes').value;
+            
+            // Récupérer les plats sélectionnés
+            const selectedItems = [];
+            const checkboxes = document.querySelectorAll('input[name="menu[]"]:checked');
+            
+            checkboxes.forEach(checkbox => {
+                selectedItems.push(checkbox.value);
+            });
+            
+            if (selectedItems.length === 0) {
+                alert('Veuillez sélectionner au moins un plat.');
+                return;
+            }
+            
+            // Formater le message pour WhatsApp
+            const whatsappNumber = "2250708481314";
+            let message = `*COMMANDE NOËL 2025 - Traiteur Maman*%0A%0A`;
+            message += `*Nom:* ${name}%0A`;
+            message += `*Téléphone:* ${phone}%0A`;
+            message += `*Date de livraison souhaitée:* ${date}%0A%0A`;
+            message += `*Plats commandés:*%0A`;
+            
+            selectedItems.forEach((item, index) => {
+                message += `${index + 1}. ${item}%0A`;
+            });
+            
+            message += `%0A*Notes supplémentaires:*%0A${notes}%0A%0A`;
+            message += `*Merci de confirmer cette commande et de préciser le montant total et les modalités de paiement/livraison.*`;
+            
+            // Ouvrir WhatsApp avec le message pré-rempli
+            const whatsappURL = `https://wa.me/${whatsappNumber}?text=${message}`;
+            window.open(whatsappURL, '_blank');
+            
+            // Afficher un message de confirmation
+            alert('Votre commande a été préparée ! Vous allez être redirigé vers WhatsApp pour l\'envoyer.');
+        });
+        
+        // Initialiser les animations
+        document.addEventListener('DOMContentLoaded', function() {
+            createSnow();
+            createStars();
+            
+            // Définir la date minimale pour le champ date
+            const dateInput = document.getElementById('date');
+            const today = new Date();
+            const minDate = new Date(2025, 11, 20); // 20 décembre 2025
+            const maxDate = new Date(2025, 11, 31); // 31 décembre 2025
+            
+            dateInput.min = formatDate(minDate);
+            dateInput.max = formatDate(maxDate);
+            dateInput.value = formatDate(new Date(2025, 11, 25)); // 25 décembre par défaut
+        });
+        
+        // Formater la date pour l'input date
+        function formatDate(date) {
+            const year = date.getFullYear();
+            const month = String(date.getMonth() + 1).padStart(2, '0');
+            const day = String(date.getDate()).padStart(2, '0');
+            return `${year}-${month}-${day}`;
+        }
+        
+        // Ajouter des effets visuels aux sections au survol
+        document.querySelectorAll('.menu-section').forEach(section => {
+            section.addEventListener('mouseenter', function() {
+                this.style.transform = 'scale(1.01)';
+                this.style.transition = 'transform 0.3s ease';
+            });
+            
+            section.addEventListener('mouseleave', function() {
+                this.style.transform = 'scale(1)';
+            });
+        });
+    </script>
+</body>
+</html>
